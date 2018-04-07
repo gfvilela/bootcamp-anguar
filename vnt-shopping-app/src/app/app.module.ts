@@ -11,6 +11,7 @@ import { ShoppingListService } from './shopping-list.service';
 import { AboutComponent } from './about/about.component';
 import { APP_ROUTES } from './app-routing.module'
 import { RouterModule } from '@angular/router';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
-    ShoppingListService
+    ShoppingListService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
