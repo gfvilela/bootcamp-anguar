@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { APP_ROUTES } from './app-routing.module'
 import { RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AuthService } from './auth.service';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    HttpClientModule
   ],
   providers: [
     ShoppingListService,

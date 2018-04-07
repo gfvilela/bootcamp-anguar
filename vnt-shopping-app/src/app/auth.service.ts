@@ -6,7 +6,7 @@ export class AuthService implements CanActivate {
 
   canActivate(){
     console.log('CanActivate was called');
-    return false;
+    return true;
   }
   constructor() { }
 
