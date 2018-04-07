@@ -20,12 +20,7 @@ export class ShoppingListItemComponent implements OnInit {
   }
 
   public removeItem() {
-    this.myShoppingListService.remove(this.listItem).subscribe(
-      res => {
-        console.log('O item foi excluido!');
-        this.deleted = true;
-      }
-    );
+    this.myShoppingListService.remove(this.listItem);
   }
 
   public crossItem() {
@@ -34,13 +29,8 @@ export class ShoppingListItemComponent implements OnInit {
       key: this.listItem.key,
       disabled: true
     }
-    
-    this.myShoppingListService.edit(itemEdited).subscribe(
-      res => {
-        console.log('')
-        this.listItem.disabled = true;
-      }
-    )
+
+    this.myShoppingListService.edit(itemEdited)
   }
 
 }

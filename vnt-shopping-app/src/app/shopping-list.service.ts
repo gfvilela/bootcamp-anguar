@@ -2,55 +2,49 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable()
 export class ShoppingListService {
 
   private listItems: Array<any>;
+  public listItemFirebase: Observable<any[]>;
+  private listItemsRef: AngularFireList<any>;
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private db: AngularFireDatabase
   ) {
-    this.listItems = [{
-      name: 'Bread',
-      disabled: false
-    },
-    {
-      name: 'Butter',
-      disabled: false
-    },
-    {
-      name: 'Coffe',
-      disabled: false
-    },
-    {
-      name: 'Cookies',
-      disabled: true
-    }
-  ]
+    this.listItems = [];
+    this.listItemsRef = this.db.list('items');
+    this.listItemFirebase = this.listItemsRef.snapshotChanges().map(
+      changes => {
+        return changes.map(
+          c => {
+            console.log(c.payload.val());
+            return ({
+              key: c.payload.key,
+              name: c.payload.val()['name'],
+              disabled: c.payload.val()['disabled']
+            });
+          }
+        )
+      }
+    )
    }
 
-   public findAll(): Observable<Object> {
-     return this.httpClient.get(`${environment.firebase.databaseURL}/items.json`);
+   public add(item){
+     this.listItemsRef.push(item)
    }
 
-   public add(item): Observable<Object>{
-     return this.httpClient.post(`${environment.firebase.databaseURL}/items.json`, item);
+   public remove(item) {
+     this.listItemsRef.remove(item.key)
    }
 
-   public remove(item): Observable<Object> {
-     return this.httpClient.delete(`${environment.firebase.databaseURL}/items/${item.key}.json`);
-   }
-
-   public cross(item) {
-     let index = this.listItems.indexOf(item);
-     this.listItems[index].disabled = true
-   }
-
-   public edit(item): Observable<Object> {
+   public edit(item) {
      let key = item.key
      delete item.key
-    return this.httpClient.patch(`${environment.firebase.databaseURL}/items/${key}.json`, item);
+     this.listItemsRef.update(key, item)
    }
 
 }

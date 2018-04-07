@@ -13,6 +13,10 @@ import { APP_ROUTES } from './app-routing.module'
 import { RouterModule } from '@angular/router';
 import { AuthService } from './auth.service';
 import { HttpClientModule } from '@angular/common/http'
+import { AngularFireModule } from 'angularfire2'
+import { AngularFireDatabaseModule } from 'angularfire2/database'
+import { AngularFireAuthModule } from 'angularfire2/auth'
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -27,8 +31,11 @@ import { HttpClientModule } from '@angular/common/http'
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(APP_ROUTES),
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
     ShoppingListService,

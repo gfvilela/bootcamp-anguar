@@ -1,2 +1,2 @@
-# bootcamp-anguar
-Bootcamp angualr firebase
+# bootcamp-angular
+Bootcamp angular firebase
