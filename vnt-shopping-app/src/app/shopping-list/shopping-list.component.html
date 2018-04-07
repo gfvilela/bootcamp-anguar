@@ -1,0 +1,15 @@
+<form action="">
+    <div class="input-group mt-3">
+      <input type="text" class="form-control" placeholder="Item name">
+      <button class="btn btn-primary">Add</button>
+    </div>
+  </form>
+  <ul class="list-group">
+    <app-shopping-list-item 
+    *ngFor="let item of listItems"
+    [item]="item">
+  </app-shopping-list-item>
+    <!-- <li class="list-group-item disabled">
+        <span>Cookies</span>
+      </li> -->
+  </ul>
