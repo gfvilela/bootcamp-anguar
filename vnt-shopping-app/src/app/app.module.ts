@@ -8,6 +8,9 @@ import { ShopingListComponent } from './shoping-list/shoping-list.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
 import { ShoppingListService } from './shopping-list.service';
+import { AboutComponent } from './about/about.component';
+import { APP_ROUTES } from './app-routing.module'
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,11 +19,13 @@ import { ShoppingListService } from './shopping-list.service';
     HeaderComponent,
     ShopingListComponent,
     ShoppingListComponent,
-    ShoppingListItemComponent
+    ShoppingListItemComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(APP_ROUTES)
   ],
   providers: [
     ShoppingListService
